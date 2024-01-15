@@ -1,4 +1,5 @@
 import React from 'react';
+import { useGlobalState } from '../context/NewsContext';
 
 const CATEGORIAS = [
   { value: 'general', label: 'General' },
@@ -11,6 +12,10 @@ const CATEGORIAS = [
 ];
 
 export const Form = () => {
+
+  const { categoria, handleChangeCategoria} = useGlobalState();
+  
+
   return (
     <div className="m-4">
       <form action="">
@@ -19,6 +24,8 @@ export const Form = () => {
             name="" 
             id=""
             className='border border-gray-300 rounded-md w-full text-center py-3 text-gray-600'
+            onChange={handleChangeCategoria}
+            value={categoria}
         >
             <option value="" className='text-gray-300' disabled>--- Select a category ---</option>
           {
@@ -38,9 +45,9 @@ export const Form = () => {
         >
             Find News
         </button>
-        
-        
-        
+        {
+          JSON.stringify(categoria)
+        }
       </form>
     </div>
   );
