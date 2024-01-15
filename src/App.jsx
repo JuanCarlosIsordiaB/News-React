@@ -1,4 +1,5 @@
 import { Form } from './components/Form'
+import { ListadoNews } from './components/ListadoNews'
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
         <h1 className="text-5xl font-bold mb-4">Find the latest news..</h1>
         <p className="text-gray-600">Here you will find the latest news of your interest.</p>
         <Form/>
+        <ListadoNews />
       </div>
     </div>
     

@@ -40,14 +40,8 @@ export const Form = () => {
             )
           }  
         </select>
-        <button
-            className='bg-indigo-500 w-full mt-3 py-3 rounded-md text-white font-bold uppercase hover:bg-indigo-900 transition-all'
-        >
-            Find News
-        </button>
-        {
-          JSON.stringify(categoria)
-        }
+        
+        
       </form>
     </div>
   );

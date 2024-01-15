@@ -12,17 +12,33 @@ export const useGlobalState = () => {
 const NewsContext = ({children}) => {
     const [categoria, setCategoria] = useState('general');
     const [noticias, setNoticias] = useState([]);
+    const [pag, setPag] = useState(1);
+    const [totalNews, setTotalNews] = useState(0);
 
-    const consultarAPI = async () => {
-        const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&pageSize=100&apiKey=${import.meta.env.VITE_API_KEY}`
-
-        const {data} = await axios(url);
-        setNoticias(data.articles);
-    } 
 
     useEffect(() => {
+        const consultarAPI = async () => {
+            const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&pageSize=100&apiKey=${import.meta.env.VITE_API_KEY}`
+    
+            const {data} = await axios(url);
+            setNoticias(data.articles);
+            setTotalNews(data.totalResults);
+            setPag(1);
+        } 
         consultarAPI();
     }, [categoria])
+
+    useEffect(() => {
+        const consultarAPI = async () => {
+            const url = `https://newsapi.org/v2/top-headlines?country=mx&page=${pag}&category=${categoria}&pageSize=100&apiKey=${import.meta.env.VITE_API_KEY}`
+    
+            const {data} = await axios(url);
+            setNoticias(data.articles);
+            setTotalNews(data.totalResults);
+            
+        } 
+        consultarAPI();
+    }, [pag])
     
 
     const handleChangeCategoria = (e) => {
@@ -30,11 +46,19 @@ const NewsContext = ({children}) => {
         console.log(categoria);
     }
 
+    const handleChangePagination = (e,valor) => {
+        setPag(valor);
+    }
+
 
   return (
     <Context.Provider value={{
             categoria,
-            handleChangeCategoria
+            handleChangeCategoria,
+            noticias,
+            totalNews,
+            handleChangePagination,
+            pag
         }}
     >
         {children}
