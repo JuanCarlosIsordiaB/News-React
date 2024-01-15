@@ -12,6 +12,7 @@ export const ListadoNews = () => {
     const { noticias,totalNews, handleChangePagination,pag } = useGlobalState();
 
     const totalPags = Math.ceil( totalNews / 20);
+    
 
   return (
     <div className=''>

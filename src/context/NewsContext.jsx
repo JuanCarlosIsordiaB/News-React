@@ -18,11 +18,12 @@ const NewsContext = ({children}) => {
 
     useEffect(() => {
         const consultarAPI = async () => {
-            const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&pageSize=100&apiKey=${import.meta.env.VITE_API_KEY}`
+            const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&apiKey=${import.meta.env.VITE_API_KEY}`
     
             const {data} = await axios(url);
             setNoticias(data.articles);
             setTotalNews(data.totalResults);
+            console.log(totalNews);
             setPag(1);
         } 
         consultarAPI();
@@ -30,11 +31,12 @@ const NewsContext = ({children}) => {
 
     useEffect(() => {
         const consultarAPI = async () => {
-            const url = `https://newsapi.org/v2/top-headlines?country=mx&page=${pag}&category=${categoria}&pageSize=100&apiKey=${import.meta.env.VITE_API_KEY}`
+            const url = `https://newsapi.org/v2/top-headlines?country=mx&page=${pag}&category=${categoria}&apiKey=${import.meta.env.VITE_API_KEY}`
     
             const {data} = await axios(url);
             setNoticias(data.articles);
             setTotalNews(data.totalResults);
+            
             
         } 
         consultarAPI();
@@ -48,6 +50,7 @@ const NewsContext = ({children}) => {
 
     const handleChangePagination = (e,valor) => {
         setPag(valor);
+        window.scrollTo(0, 0); // desplazar hacia arriba
     }
 
 
